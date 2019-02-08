@@ -1,15 +1,18 @@
 <template>
     <div id="components" class="form">
-        <label for="CampaignName">Nom de la Campagne</label><br>
-        <input v-model="list.name">
-        <button v-on:click="addKeyword">Ajout Mots-clé</button><br><br>
-        <!-- <p>name : {{ list.name }}</p> -->
-        <span>Entrer les mots-clés</span><br>
-        <textarea rows="6" cols="40" v-model="list.keywords"></textarea><br>
+        <label for="CampaignName">Nom de la Campagne</label>
+        <input v-model="nametoadd">
+        <button v-on:click="addName">Ajouter</button><br><br>
+
+        <label for="Keywords">Mots-clé</label>
+        <input v-model="keytoadd">
+        <button v-on:click="addKeyword">Ajouter</button><br><br>
+        <p>Nom de la campagne : {{list.name}}</p>
         <ul>
-            <li v-for="(keyword,index) in list.keywords" v-bind:key="index">{{keyword}}</li>
+            <li v-for="(keyword,index) in list.keywords" v-bind:key="index">
+                {{keyword}} <button v-on:click="remove(index)">Supprimer</button>
+            </li>
         </ul>
-        <!-- <p>keywords : {{ list.keywords }}</p> -->
         <button v-on:click="generateJson">Générer JSON</button>
     </div>
 </template>
@@ -19,9 +22,12 @@ export default {
     data() {
         return {
             list:{
-                name: "coucou",
-                keywords: ["coucou","cucu"]
-            }
+                name: "champagne",
+                keywords: ["coucou","cmwoi"]
+            },
+            keytoadd: null,
+            nametoadd: null,
+            jsonfile: null
         }
     },
 
@@ -30,8 +36,14 @@ export default {
             
         },
         addKeyword: function() {
-            this.list.keywords.push(this.list.name);
-        }
+            this.list.keywords.push(this.keytoadd);
+        },
+        addName: function() {
+            this.list.name = this.nametoadd;
+        },
+        remove: function(index) {
+            this.list.keywords.splice(index, 1)
+        },
     }
 }
 </script>
