@@ -15,14 +15,14 @@
 
 <style>
 
-  .header {
+.header {
   padding: 10px;
   text-align: center;
   background: deepskyblue;
   color: white;
 }
 
-  ul {
+.header ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -30,11 +30,11 @@
   background-color: #333;
 }
 
-li {
+.header li {
   float: left;
 }
 
-li a {
+.header li a {
   display: block;
   color: white;
   text-align: center;
@@ -42,7 +42,7 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+.header li a:hover:not(.active) {
   background-color: #111;
 }
 </style>

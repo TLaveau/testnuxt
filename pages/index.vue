@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="index">
     <div>
       <h1> Test home </h1>
       <h2> form -> keywords -> JSON </h2>
