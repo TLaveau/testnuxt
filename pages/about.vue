@@ -1,8 +1,7 @@
 <template>
   <section id="index">
     <div>
-      <h1> home </h1>
-      <h2> Keywords -> JSON -> CSV </h2>
+      <h1> about </h1>
     </div>
   </section>
 </template>

@@ -7,13 +7,14 @@
         <label for="Keywords">Mots-clé</label>
         <input v-model="keytoadd">
         <button v-on:click="addKeyword">Ajouter</button><br><br>
-        <p>Nom de la campagne : {{list.name}}</p>
+        <p>Nom de la campagne : {{list.campaigns.name}}</p>
         <ul>
-            <li v-for="(keyword,index) in list.keywords" v-bind:key="index">
+            <li v-for="(keyword,index) in list.campaigns.keywords" v-bind:key="index">
                 {{keyword}} <button v-on:click="remove(index)">Supprimer</button>
             </li>
         </ul>
-        <button v-on:click="generateJson">Générer JSON</button>
+        <button v-on:click="generateJSON">Générer JSON</button>
+        <button v-on:click="generateCSV">Générer CSV</button>
     </div>
 </template>
 
@@ -22,8 +23,10 @@ export default {
     data() {
         return {
             list:{
-                name: "champagne",
-                keywords: ["coucou","cmwoi"]
+                campaigns: {
+                    name : "champagne",
+                    keywords: ["coucou","cmwoi"]
+                }
             },
             keytoadd: null,
             nametoadd: null,
@@ -32,21 +35,34 @@ export default {
     },
 
     methods: {
-        generateJson: function() {
+        generateJSON: function() {
+            const data = JSON.stringify(this.list)
+            this.jsonfile = data;
+            const blob = new Blob([data], {type: 'text/plain'})
+            const e = document.createEvent('MouseEvents'),
+            a = document.createElement('a');
+            var jsonName = "campagne" + this.list.campaigns.name;
+            a.download = jsonName + ".json";
+            a.href = window.URL.createObjectURL(blob);
+            a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
+            e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            a.dispatchEvent(e);
+        },
+        generateCSV: function() {
             
         },
         addKeyword: function() {
-            this.list.keywords.push(this.keytoadd);
+            this.list.campaigns.keywords.push(this.keytoadd);
         },
         addName: function() {
-            this.list.name = this.nametoadd;
+            this.list.campaigns.name = this.nametoadd;
         },
         remove: function(index) {
-            this.list.keywords.splice(index, 1)
+            this.list.campaigns.keywords.splice(index, 1)
         },
     }
 }
-</script>
+</script>   
 
 <style>
     li{

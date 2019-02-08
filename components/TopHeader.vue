@@ -16,9 +16,7 @@
 <style>
 
 .header {
-  padding: 10px;
   text-align: center;
-  background: deepskyblue;
   color: white;
 }
 
