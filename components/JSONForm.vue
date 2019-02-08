@@ -53,12 +53,23 @@ export default {
         },
         generateCSV: function() {
             var csv = "";
-            csv = "campaigns,keywords" + '\r\n\n';
-            csv += this.list.campaigns.name + "," + '\r\n\n';
+            csv = "campaigns,keywords" + '\r\n';
+            csv += this.list.campaigns.name + "," + '\r\n';
             this.list.campaigns.keywords.forEach(element => {
-                csv += this.list.campaigns.name + "," + element + '\r\n\n';
+                csv += this.list.campaigns.name + "," + element + '\r\n';
             });
             this.csvfile = csv;
+
+            // Download file
+            const blobcsv = new Blob([csv], {type: 'text/plain'})
+            const ecsv = document.createEvent('MouseEvents'),
+            a = document.createElement('a');
+            var csvName = "campagne" + this.list.campaigns.name;
+            a.download = csvName + ".csv";
+            a.href = window.URL.createObjectURL(blobcsv);
+            a.dataset.downloadurl = ['text/csv', a.download, a.href].join(':');
+            ecsv.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            a.dispatchEvent(ecsv);
         },
         addKeyword: function() {
             this.list.campaigns.keywords.push(this.keytoadd);
