@@ -1,10 +1,10 @@
 <template>
-  <section>
-    <div id="app">
-      <h1> Keywords -> JSON -> CSV </h1>
-      <JSONForm/>
-    </div>
-  </section>
+  	<section>
+    	<div id="app">
+      		<h1> Keywords -> JSON -> CSV </h1>
+      		<JSONForm/>
+    	</div>
+	</section>
 </template>
 
 <script>
@@ -12,13 +12,13 @@ import JSONForm from '~/components/JSONForm.vue'
 import Vue from 'vue'
 
 new Vue({ 
-  el: '#app'
+	el: '#app'
 })
 
 export default {
-  components: {
-    JSONForm
-  }
+	components: {
+		JSONForm
+	}
 }
 </script>
 
