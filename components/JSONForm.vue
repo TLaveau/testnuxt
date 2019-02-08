@@ -14,7 +14,9 @@
             </li>
         </ul>
         <button v-on:click="generateJSON">Générer JSON</button>
+        <p>JSON : {{ jsonfile }}</p>
         <button v-on:click="generateCSV">Générer CSV</button>
+        <p>CSV : {{ csvfile }}</p>
     </div>
 </template>
 
@@ -30,7 +32,8 @@ export default {
             },
             keytoadd: null,
             nametoadd: null,
-            jsonfile: null
+            jsonfile: null,
+            csvfile: null
         }
     },
 
@@ -49,7 +52,13 @@ export default {
             a.dispatchEvent(e);
         },
         generateCSV: function() {
-            
+            var csv = "";
+            csv = "campaigns,keywords" + '\r\n\n';
+            csv += this.list.campaigns.name + "," + '\r\n\n';
+            this.list.campaigns.keywords.forEach(element => {
+                csv += this.list.campaigns.name + "," + element + '\r\n\n';
+            });
+            this.csvfile = csv;
         },
         addKeyword: function() {
             this.list.campaigns.keywords.push(this.keytoadd);
